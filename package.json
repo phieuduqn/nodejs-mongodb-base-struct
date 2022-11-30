@@ -1,0 +1,106 @@
+{
+  "name": "nodejs-mongodb",
+  "author": "ptx",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon src/index.js --exec \"LOCAL_MODE=true node -r dotenv/config -r babel-register\"",
+    "start": "node src/index.js --exec \"NODE_ENV=production node -r dotenv/config -r babel-register\"",
+    "eslint": "eslint . --ext .js,.ts",
+    "eslint:fix": "eslint --fix .",
+    "precommit": "yarn eslint",
+    "precommit-msg": "echo 'Pre-commit: checking for coding conventions...' && exit 0",
+    "prettier": "npx prettier ./ --check",
+    "prettier:fix": "yarn prettier -- --write",
+    "format": "yarn prettier:fix && yarn eslint:fix",
+    "apidoc": "apidoc -i src/packages/ -o apidoc/",
+    "seed": "md-seed run",
+    "seed-dropdb": "md-seed run --dropdb"
+  },
+  "pre-commit": [
+    "precommit-msg",
+    "precommit"
+  ],
+  "bin": {
+    "genModel": "./commands/model.js"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  },
+  "nodemonConfig": {
+    "verbose": false,
+    "ignore": [
+      "node_modules",
+      "src/files",
+      "logs"
+    ],
+    "ext": "js"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.2",
+    "@hapi/joi": "^15.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "bcrypt": "^5.1.0",
+    "cluster": "^0.7.7",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "cron": "^2.1.0",
+    "crypto-js": "^4.1.1",
+    "debug": "~4.3.4",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "~4.18.2",
+    "express-validation": "^1.0.2",
+    "helmet": "^6.0.0",
+    "http-errors": "~2.0.0",
+    "i18n": "^0.15.1",
+    "ip": "^1.1.8",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.39",
+    "mongoose": "^6.7.4",
+    "mongoose-aggregate-paginate-v2": "^1.0.42",
+    "mongoose-data-seed": "^2.1.6",
+    "mongoose-paginate-v2": "^1.7.1",
+    "morgan": "~1.10.0",
+    "path": "^0.12.7",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1",
+    "winston-loggly-bulk": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-eslint-plugin": "^5.0.6",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "faker": "^6.6.6",
+    "mongoose-seed": "^0.6.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.8.0"
+  },
+  "mdSeed": {
+    "seedersFolder": "./src/seeders"
+  }
+}
